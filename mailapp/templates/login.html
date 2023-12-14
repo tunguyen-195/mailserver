@@ -1,0 +1,31 @@
+{% extends "./base.html" %} 
+
+{%block title%}T07 Mail Server{%endblock%} 
+
+{% block styles %}
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+
+{%block content%}
+<h1>T07 Mail Server</h1>
+<div class="login-box">
+  <h2>Login</h2>
+  <form method="POST" action="{{url_for('login')}}">
+    <div class="user-box">
+      <input type="text" id="username" name="username" required="" />
+      <label>Username</label>
+    </div>
+    <div class="user-box">
+      <input type="password" id="password" name="password" required="" />
+      <label>Password</label>
+    </div>
+    <button type="submit" id="login">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      Submit
+    </button>
+  </form>
+</div>
+{% endblock %}

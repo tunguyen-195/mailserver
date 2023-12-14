@@ -1,0 +1,29 @@
+# Python
+*.pyc
+*.pyo
+__pycache__/
+
+# Virtual environment
+venv/
+env/
+
+# Flask migration
+/migrations/
+
+# Compiled Python files
+*.pyc
+*.pyo
+*.pyd
+
+# Logs
+*.log
+
+# Environment variables
+.env
+
+# SQLite database files
+*.db
+
+# OS-specific files
+.DS_Store
+Thumbs.db

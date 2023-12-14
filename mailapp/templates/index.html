@@ -1,0 +1,371 @@
+{% extends "./base.html" %} 
+
+{%block title%}T07 Mail Server{%endblock%} 
+
+{% block styles %}
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,400i,700,700i&display=swap" rel="stylesheet">
+  {% endblock %}
+  
+{% block scripts %}
+  <script type="text/javascript" src="{{ url_for('static', filename='scripts/index.js') }}"></script>
+  <script src="https://kit.fontawesome.com/3881a881dd.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+{% endblock %}
+
+{%block content%}
+<div class = "container">
+    <button class="app-cancel-bonuses">Please cancel this !</button>
+
+    {% if administration %}
+    <a class="app-info app-info--right" href="{{ url_for('administration')}}"> Administration </a>
+    {% endif %}
+
+    <div class="app">
+        <div class="top">
+            <!-- MENU -->
+            <div class="top-menu">
+                <div class="top-menu__item">
+                    <div class="top-menu__label">File</div>
+                    <ul class="top-menu-sub">
+                        <li class="top-menu-sub__item">New mail</li>
+                        <li class="top-menu-sub__item">Refresh mails</li>
+                        <li class="top-menu-sub__separator"></li>
+                        <li class="top-menu-sub__item">Export mails to MP3</li>
+                        <li class="top-menu-sub__item">Export mails to BMP</li>
+                        <li class="top-menu-sub__separator"></li>
+                        <li class="top-menu-sub__item bonus-exit">Exit</li>
+                    </ul>
+                </div>
+                <div class="top-menu__item">
+                    <div class="top-menu__label">Edit</div>
+                    <ul class="top-menu-sub">
+                        <li class="top-menu-sub__item">Undo</li>
+                        <li class="top-menu-sub__item">Redo</li>
+                        <li class="top-menu-sub__separator"></li>
+                        <li class="top-menu-sub__item">Settings</li>
+                    </ul>
+                </div>
+                <div class="top-menu__item">
+                    <div class="top-menu__label">Bonus</div>
+                    <ul class="top-menu-sub">
+                        <li class="top-menu-sub__item bonus-weird-rotate">Infinite weird rotate of the app</li>
+                        <li class="top-menu-sub__item bonus-zoom">Please zoom</li>
+                        <li class="top-menu-sub__item bonus-why-so-serious">Why so serious ? </li>
+                        <li class="top-menu-sub__item bonus-russia">Please more russia </li>
+                    </ul>
+                </div>
+                <div class="top-menu__item">
+                    <div class="top-menu__label">About</div>
+                    <ul class="top-menu-sub">
+                        <li class="top-menu-sub__item">
+                            <a class="top-menu-sub__link" target="_BLANK">Repository of this app</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="top-search">
+                <i class="fas fa-search"></i>
+                <input class="input" type="text" placeholder="Search mails...">
+            </div>
+
+            <div class="top-action">
+                <div class="top-action__item"><div class = "usr-name">{{user}}</div></i></div>
+                <a class="top-action__item" href="{{ url_for('change') }}">
+                    <i class="fas fa-wrench"></i>
+                </a>
+                <a class="top-action__item" href="{{ url_for('logout') }}">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="app__content">
+            <div class="accounts">
+                <div class="accounts__item accounts__item--active">
+                    <span class="accounts__pill pill pill--solid">{{totalInbox}}</span>
+                    <img class="accounts__avatar"
+                        src="https://creer.casecompany.paris/uploads/themes/original/5c9deb858a91e.png" alt="">
+                </div>
+            </div>
+
+            <div class="menu">
+                <div>
+                    <div class="menu-main tabs">
+                        <div class="menu__item active">
+                            <div>
+                                <i class="menu__icon fas fa-inbox"></i>
+                                <span class="menu__label">Inbox</span>
+                            </div>
+                            <span class="menu-main__pill pill">{{totalInbox}}</span>
+                        </div>
+                        <div class="menu__item ">
+                            <div>
+                                <i class="menu__icon fas fa-paper-plane"></i>
+                                <span class="menu__label">Sent mail</span>
+                            </div>
+                            <span class="menu-main__pill pill">{{totalSent}}</span>
+                        </div>
+                        <div class="menu__item ">
+                            <div>
+                                <i class="menu__icon fas fa-pencil-alt"></i>
+                                <span class="menu__label">Drafts</span>
+                            </div>
+                            <span class="menu-main__pill pill">2</span>
+                        </div>
+                        <div class="menu__item ">
+                            <div>
+                                <i class="menu__icon fas fa-trash-alt"></i>
+                                <span class="menu__label">Spam</span>
+                            </div>
+                            <span class="menu-main__pill pill">290</span>
+                        </div>
+                    </div>
+                    <ul class="menu-tags">
+                        <li class="menu-tags__item">
+                            <span class="dot dot--pink"></span>
+                            <span class="menu-tags__label">Shopping</span>
+                        </li>
+                        <li class="menu-tags__item">
+                            <span class="dot dot--red"></span>
+                            <span class="menu-tags__label">Important</span>
+                        </li>
+                        <li class="menu-tags__item">
+                            <span class="dot dot--blue"></span>
+                            <span class="menu-tags__label">Work</span>
+                        </li>
+                        <li class="menu-tags__item">
+                            <span class="dot dot--green"></span>
+                            <span class="menu-tags__label">Done</span>
+                        </li>
+                        <li class="menu-tags__item">
+                            <span class="dot dot--yellow"></span>
+                            <span class="menu-tags__label">To-Do</span>
+                        </li>
+                        <li class="menu-tags__item">
+                            <span class="dot dot--purple"></span>
+                            <span class="menu-tags__label">Personal</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Soạn thư mới nằm ở đây -->
+                <div class="new">
+                    <button class="new__button new-mail__toggle"><i class="fas fa-plus"></i></button>
+                    <div class="new-mail">
+                        <div class="new-mail__top">
+                            <div class="new-mail__title">
+                                <span>Write a new mail from</span>
+                                <div class="select">
+                                    <select class="select__item" name="" id="">
+                                        <option value="">jeanclaude@gmail.com</option>
+                                        <option value="">him@gmail.com</option>
+                                    </select>
+                                    <i class="select__arrow fas fa-sort-down"></i>
+                                </div>
+                            </div>
+                            <i class="new-mail__close new-mail__toggle fas fa-times"></i>
+                        </div>
+                        <div class="new-mail-exp">
+                            <div class="new-mail-exp__item">
+                                <div class="new-mail-exp__label">To</div>
+                                <input placeholder="Enter email" type="text" class="new-mail-exp__input">
+                            </div>
+                            <div class="new-mail-exp__item">
+                                <div class="new-mail-exp__label">Object</div>
+                                <input placeholder="Enter mail object" type="text" class="new-mail-exp__input">
+                            </div>
+                        </div>
+                        <div class="new-mail__content">
+                            <textarea
+                                class="new-mail__message">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur eveniet corrupti deserunt ad cum inventore error architecto voluptatum temporibus eligendi asperiores placeat explicabo, consequatur molestias. Corrupti voluptatem commodi dicta dolorum.</textarea>
+                        </div>
+                        <div class="new-mail-foot">
+                            <div class="new-mail-foot__insert">
+                                <i class="new-mail-foot__icon far fa-file-archive"></i>
+                                <i class="new-mail-foot__icon far fa-image"></i>
+                                <i class="new-mail-foot__icon fas fa-paperclip"></i>
+                            </div>
+                            <div class="new-mail-foot__actions">
+                                <button class="button button new-mail__toggle">Cancel</button>
+                                <button class="button button--primary">
+                                    <i class="fas fa-paper-plane"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hộp thư đến -->
+            <div class="mails ">
+                <!-- active Nhớ bổ xung trạng thái -->
+                <div class="message-list scrollable active">
+                        <div class="scrollable__target">
+                            {% for mail in receivedmails %}
+                            <div class="message message--new" onclick="addToMails('{{ mail.id }}', '{{ mail.subject }}', '{{ mail.sender_email}}', '{{ mail.content}}', '{{ mail.received_at}}')">
+                                <div class="message-tags">
+                                    <span class="dot dot--green"></span>
+                                </div>
+                                <div class="message__actions">
+                                    <i class="message__icon far fa-square"></i>
+                                    <i class="message__icon fas fa-trash-alt"></i>
+                                    <i class="message__icon fas fa-archive"></i>
+                                </div>
+                                <div class="message__content">
+                                    <div class="message__exp">
+                                        <div>{{mail.sender_email}}</div>
+                                        <div class="date">{{mail.received_at}}</div>
+                                    </div>
+                                    <div class="message__title">
+                                        {{mail.subject}}
+                                    </div>
+                                    <div class="message__expr">
+                                        « {{mail.content}} »
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                </div>
+
+                <div class="message-list scrollable">
+                    <div class="scrollable__target">
+                        {% for mail in sentMails %}
+                        <div class="message message--new" onclick="addToMails('{{ mail.id }}', '{{ mail.subject }}', '{{ mail.recipient_email}}', '{{ mail.content}}', '{{ mail.sent_at}}')">
+                            <div class="message-tags">
+                                <span class="dot dot--red"></span>
+                            </div>
+                            <div class="message__actions">
+                                <i class="message__icon far fa-square"></i>
+                                <i class="message__icon fas fa-trash-alt"></i>
+                                <i class="message__icon fas fa-archive"></i>
+                            </div>
+                            <div class="message__content">
+                                <div class="message__exp">
+                                    <div>{{mail.recipient_email}}</div>
+                                    <div class="date">{{mail.sent_at}}</div>
+                                </div>
+                                <div class="message__title">
+                                    {{mail.subject}}
+                                </div>
+                                <div class="message__expr">
+                                    « {{mail.content}} »
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+
+                <div class="message-list scrollable">
+                    <div class="scrollable__target">
+                        {% for mail in receivedmails %}
+                        <div class="message message--new" onclick="addToMails('{{ mail.id }}', '{{ mail.subject }}', '{{ mail.sender_email}}', '{{ mail.content}}', '{{ mail.received_at}}')">
+                            <div class="message-tags">
+                                <span class="dot dot--green"></span>
+                            </div>
+                            <div class="message__actions">
+                                <i class="message__icon far fa-square"></i>
+                                <i class="message__icon fas fa-trash-alt"></i>
+                                <i class="message__icon fas fa-archive"></i>
+                            </div>
+                            <div class="message__content">
+                                <div class="message__exp">
+                                    <div>{{mail.sender_email}}</div>
+                                    <div class="date">{{mail.received_at}}</div>
+                                </div>
+                                <div class="message__title">
+                                    {{mail.subject}}
+                                </div>
+                                <div class="message__expr">
+                                    « {{mail.content}} »
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+
+                <div class="message-list scrollable">
+                    <div class="scrollable__target">
+                        {% for mail in receivedmails %}
+                        <div class="message message--new" onclick="addToMails('{{ mail.id }}', '{{ mail.subject }}', '{{ mail.sender_email}}', '{{ mail.content}}', '{{ mail.received_at}}')">
+                            <div class="message-tags">
+                                <span class="dot dot--yellow"></span>
+                            </div>
+                            <div class="message__actions">
+                                <i class="message__icon far fa-square"></i>
+                                <i class="message__icon fas fa-trash-alt"></i>
+                                <i class="message__icon fas fa-archive"></i>
+                            </div>
+                            <div class="message__content">
+                                <div class="message__exp">
+                                    <div>{{mail.sender_email}}</div>
+                                    <div class="date">{{mail.received_at}}</div>
+                                </div>
+                                <div class="message__title">
+                                    {{mail.subject}}
+                                </div>
+                                <div class="message__expr">
+                                    « {{mail.content}} »
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+
+
+                <div class="preview">
+                    <div class="preview-top">
+
+                        <div id = "open_subject" class="preview__title"></div>
+                        <div>
+                            <i class="preview-top__icon fas fa-print"></i>
+                            <i class="preview-top__icon fas fa-archive"></i>
+                            <i class="preview-top__icon fas fa-ellipsis-h"></i>
+                        </div>
+                    </div>
+                    <div class="scrollable">
+                        <div class="preview-content scrollable__target" id = "sent">
+                            <div class="preview-respond">
+                                <div class="preview-respond__head">
+                                    <div class="profile-head">
+                                        <div class="profile-head__id">
+                                            <img class="profile-head__avatar"
+                                                src="https://creer.casecompany.paris/uploads/themes/original/5c9deb858a91e.png" 
+                                                alt="">
+                                            <div>
+                                                <div id = "open_sender_name" class="profile-head__name"></div>
+                                                <div id = "open_sender" class="profile-head__mail"></div>
+                                            </div>
+                                        </div>
+                                        <div id = "open_received_at" class="date"></div>
+                                    </div>
+                                </div>
+                                <div class="preview-respond__content">
+                                    <p class="paragraph">
+                                        <pre id = "open_content">
+
+                                        </pre>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preview-foot">
+                        <button class="preview-foot__button button"><i class="fas fa-reply-all"></i> Reply All</button>
+                        <button class="preview-foot__button button"><i class="fas fa-reply"></i> Reply</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

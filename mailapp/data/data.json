@@ -1,0 +1,82 @@
+{
+    "roles": [
+      {"id": 1, "name": "admin"},
+      {"id": 2, "name": "user"}
+    ],
+    "users": [
+      {"id": 1, "username": "admin", "password_hash": "1", "full_name": "Huy Hoàng", "email_address": "huyhoang@t07.com", "role_id": 1},
+      {"id": 2, "username": "user", "password_hash": "1", "full_name": "Hoàng Trung", "email_address": "hoangtrung@t07.com", "role_id": 2},
+      {"id": 3, "username": "user2", "password_hash": "1", "full_name": "Regular User 2", "email_address": "user2@t07.com", "role_id": 2},
+      {"id": 4, "username": "admin2", "password_hash": "1", "full_name": "Admin User 2", "email_address": "admin2@t07.com", "role_id": 1},
+      {"id": 5, "username": "admin3", "password_hash": "1", "full_name": "Admin User 3", "email_address": "admin3@t07.com", "role_id": 1},
+      {"id": 6, "username": "user3", "password_hash": "1", "full_name": "Regular User 3", "email_address": "user3@t07.com", "role_id": 2}
+    ],
+
+    "mailboxes": [
+      {"id": 1, "user_id": 1, "name": "Inbox", "description": "Inbox for huyhoang"},
+      {"id": 2, "user_id": 2, "name": "Inbox", "description": "Inbox for hoangtrung"},
+      {"id": 3, "user_id": 3, "name": "Inbox", "description": "Inbox for user2"},
+      {"id": 4, "user_id": 4, "name": "Inbox", "description": "Inbox for admin2"},
+      {"id": 5, "user_id": 5, "name": "Inbox", "description": "Inbox for admin3"},
+      {"id": 6, "user_id": 6, "name": "Inbox", "description": "Inbox for user3"}
+    ],
+
+    "sentmails": [
+      {"id": 1, "user_id": 1, "recipient_email": "hoangtrung@t07.com", "subject": "Hello User 1", "content": "Content for User 1", "sent_at": "2023-01-01 10:00:00"},
+      {"id": 2, "user_id": 1, "recipient_email": "user2@t07.com", "subject": "Hello User 2", "content": "Content for User 2", "sent_at": "2023-01-01 11:00:00"},
+      {"id": 3, "user_id": 2, "recipient_email": "huyhoang@t07.com", "subject": "Hello Admin 1", "content": "Content for Admin 1", "sent_at": "2023-01-01 12:00:00"},
+      {"id": 4, "user_id": 2, "recipient_email": "admin2@t07.com", "subject": "Hello Admin 2", "content": "Content for Admin 2", "sent_at": "2023-01-01 13:00:00"},
+      {"id": 5, "user_id": 3, "recipient_email": "admin3@t07.com", "subject": "Hello Admin 3", "content": "Content for Admin 3", "sent_at": "2023-01-01 14:00:00"},
+      {"id": 6, "user_id": 3, "recipient_email": "user3@t07.com", "subject": "Hello User 3", "content": "Content for User 3", "sent_at": "2023-01-01 15:00:00"}
+    ],
+
+    "receivedmails": [
+      {"id": 1, "user_id": 2, "sender_email": "huyhoang@t07.com", "subject": "Re: Hello Admin 1", "content": "Reply to Admin 1", "received_at": "2023-01-02 10:00:00", "is_read": 1},
+      {"id": 2, "user_id": 2, "sender_email": "admin2@t07.com", "subject": "Re: Hello Admin 2", "content": "Reply to Admin 2", "received_at": "2023-01-02 11:00:00", "is_read": 1},
+      {"id": 3, "user_id": 3, "sender_email": "admin3@t07.com", "subject": "Re: Hello Admin 3", "content": "Reply to Admin 3", "received_at": "2023-01-02 12:00:00", "is_read": 1},
+      {"id": 4, "user_id": 3, "sender_email": "user3@t07.com", "subject": "Re: Hello User 3", "content": "Reply to User 3", "received_at": "2023-01-02 13:00:00", "is_read": 0},
+      {"id": 5, "user_id": 4, "sender_email": "huyhoang@t07.com", "subject": "Re: Hello Admin 1", "content": "Reply to Admin 1", "received_at": "2023-01-02 14:00:00", "is_read": 0},
+      {"id": 6, "user_id": 4, "sender_email": "hoangtrung@t07.com", "subject": "Re: Hello User 1", "content": "Reply to User 1", "received_at": "2023-01-02 15:00:00", "is_read": 0}
+    ],
+    "mailboxemails": [
+      {"id": 1, "mailbox_id": 1, "email_id": 1, "is_archived": false, "is_trash": false},
+      {"id": 2, "mailbox_id": 1, "email_id": 2, "is_archived": false, "is_trash": false},
+      {"id": 3, "mailbox_id": 2, "email_id": 3, "is_archived": false, "is_trash": false},
+      {"id": 4, "mailbox_id": 2, "email_id": 4, "is_archived": false, "is_trash": false},
+      {"id": 5, "mailbox_id": 3, "email_id": 5, "is_archived": false, "is_trash": false},
+      {"id": 6, "mailbox_id": 3, "email_id": 6, "is_archived": false, "is_trash": false}
+    ],
+    "emailaccounts": [
+      {"id": 1, "user_id": 1, "email_address": "huyhoang@t07.com", "incoming_server": "imap.t07.com", "outgoing_server": "smtp.t07.com", "incoming_port": 993, "outgoing_port": 587, "username": "huyhoang", "password": "huyhoang_password", "is_default": true},
+      {"id": 2, "user_id": 2, "email_address": "hoangtrung@t07.com", "incoming_server": "imap.t07.com", "outgoing_server": "smtp.t07.com", "incoming_port": 993, "outgoing_port": 587, "username": "hoangtrung", "password": "hoangtrung_password", "is_default": true},
+      {"id": 3, "user_id": 3, "email_address": "user2@t07.com", "incoming_server": "imap.t07.com", "outgoing_server": "smtp.t07.com", "incoming_port": 993, "outgoing_port": 587, "username": "user2", "password": "user2_password", "is_default": true},
+      {"id": 4, "user_id": 4, "email_address": "admin2@t07.com", "incoming_server": "imap.t07.com", "outgoing_server": "smtp.t07.com", "incoming_port": 993, "outgoing_port": 587, "username": "admin2", "password": "admin2_password", "is_default": true},
+      {"id": 5, "user_id": 5, "email_address": "admin3@t07.com", "incoming_server": "imap.t07.com", "outgoing_server": "smtp.t07.com", "incoming_port": 993, "outgoing_port": 587, "username": "admin3", "password": "admin3_password", "is_default": true},
+      {"id": 6, "user_id": 6, "email_address": "user3@t07.com", "incoming_server": "imap.t07.com", "outgoing_server": "smtp.t07.com", "incoming_port": 993, "outgoing_port": 587, "username": "user3", "password": "user3_password", "is_default": true}
+    ],
+    "securityoptions": [
+      {"id": 1, "user_id": 1, "use_ssl": "yes", "use_tls": "no"},
+      {"id": 2, "user_id": 2, "use_ssl": "yes", "use_tls": "no"},
+      {"id": 3, "user_id": 3, "use_ssl": "yes", "use_tls": "no"},
+      {"id": 4, "user_id": 4, "use_ssl": "yes", "use_tls": "no"},
+      {"id": 5, "user_id": 5, "use_ssl": "yes", "use_tls": "no"},
+      {"id": 6, "user_id": 6, "use_ssl": "yes", "use_tls": "no"}
+    ],
+    "sessions": [
+      {"id": 1, "user_id": 1, "token": "session_token_huyhoang", "expiry": "2023-01-01 12:00:00"},
+      {"id": 2, "user_id": 2, "token": "session_token_hoangtrung", "expiry": "2023-01-01 12:00:00"},
+      {"id": 3, "user_id": 3, "token": "session_token_user2", "expiry": "2023-01-01 12:00:00"},
+      {"id": 4, "user_id": 4, "token": "session_token_admin2", "expiry": "2023-01-01 12:00:00"},
+      {"id": 5, "user_id": 5, "token": "session_token_admin3", "expiry": "2023-01-01 12:00:00"},
+      {"id": 6, "user_id": 6, "token": "session_token_user3", "expiry": "2023-01-01 12:00:00"}
+    ],
+    "passwordresettokens": [
+      {"id": 1, "user_id": 1, "token": "reset_token_huyhoang", "expiry": "2023-01-01 12:00:00"},
+      {"id": 2, "user_id": 2, "token": "reset_token_hoangtrung", "expiry": "2023-01-01 12:00:00"},
+      {"id": 3, "user_id": 3, "token": "reset_token_user2", "expiry": "2023-01-01 12:00:00"},
+      {"id": 4, "user_id": 4, "token": "reset_token_admin2", "expiry": "2023-01-01 12:00:00"},
+      {"id": 5, "user_id": 5, "token": "reset_token_admin3", "expiry": "2023-01-01 12:00:00"},
+      {"id": 6, "user_id": 6, "token": "reset_token_user3", "expiry": "2023-01-01 12:00:00"}
+    ]
+  }
+  
