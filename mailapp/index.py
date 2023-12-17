@@ -1,46 +1,12 @@
 import sys
 sys.path.insert(0, '/Users/nguyenminhtu/Workspace/Freelance/mailserver')
-# from flask_mail import Mail, Message
-# import threading
-# import sqlite3
 from mailapp.admin import *
 from flask import session, request, redirect, url_for, render_template, jsonify
 from flask_login import login_user, logout_user, login_required, current_user
-from mailapp import app, db, bcrypt, login_manager
+from mailapp import app, login_manager
 import utils
+
 admin.init_app(app)
-
-
-# # Hàm xử lý việc nhận email và lưu vào cơ sở dữ liệu
-# def receiveAndSaveEmail(sender, subject, body):
-#     with lock:
-#         print('hi')
-#         # Thực hiện lưu email vào cơ sở dữ liệu SQLite ở đây
-
-
-
-
-# # Cấu hình ứng dụng mail
-# app.config['MAIL_SERVER'] = '127.0.0.1'
-# app.config['MAIL_PORT'] = 465
-# app.config['MAIL_USERNAME'] = 't07@gmail.com'
-# app.config['MAIL_PASSWORD'] = '123'
-# app.config['MAIL_USE_SSL'] = True
-# mail = Mail(app)
-
-# lock = threading.Lock()
-
-# # Route để nhận email
-# @app.route('/receive_email', methods=['POST'])
-# def receive_email():
-#     sender = request.form['sender']
-#     subject = request.form['subject']
-#     body = request.form['body']
-    
-#     # Gửi email đến hàm xử lý nhận và lưu
-#     threading.Thread(target=receiveAndSaveEmail, args=(sender, subject, body)).start()
-    
-#     return 'Email received and being processed'
 
 @login_manager.user_loader
 def user_load(user_id):
@@ -96,13 +62,11 @@ def home():
     if 'logged_in' in session:
         inbox = utils.getInbox(current_user.id)
         sentMail = utils.getSentMail(current_user.id)
-
         return render_template('index.html', receivedmails = inbox, sentMails = sentMail, 
-                                totalInbox = len(inbox), totalSent = len(sentMail), 
-                                user = current_user.full_name, administration = session['role'])
+                                totalInbox = len(inbox), totalSent = len(sentMail), secret_key = app.secret_key,
+                                user = current_user.full_name, administration = session['role'], email = current_user.email_address)
     else:
         return redirect(url_for('login'))
-    
     
 @app.route('/change', methods=['GET', 'POST'])
 @login_required
@@ -151,6 +115,29 @@ def open_mail():
         }
     session['mails'] = mails
     return jsonify(mails[id])  
+
+@app.route('/api/send-mail', methods = ['POST'])
+def send_mail():
+    data = request.json
+    email = data.get('email')
+    title = data.get('title')
+    content = data.get('message')
+    app.logger.info('-------------------', email,title,content)
+    try:
+        receive_user_id = utils.getUserByEmail(email).id
+        if utils.add_sent_mail(current_user.id, email, title, content):
+            utils.add_received_mail(receive_user_id, current_user.email_address, title, content)
+            return '', 204
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+    
+
+@app.route('/get-secret-key')
+def secret_key():
+    secret_key = app.secret_key
+    return jsonify({"secret_key": secret_key})
+
 
 if __name__ == '__main__':
 

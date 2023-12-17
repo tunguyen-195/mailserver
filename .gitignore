@@ -22,7 +22,7 @@ env/
 .env
 
 # SQLite database files
-*.db
+# *.db
 
 # OS-specific files
 .DS_Store

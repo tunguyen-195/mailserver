@@ -22,6 +22,7 @@
     {% endif %}
 
     <div class="app">
+        <div id="toast"></div>
         <div class="top">
             <!-- MENU -->
             <div class="top-menu">
@@ -158,8 +159,8 @@
                                 <span>Write a new mail from</span>
                                 <div class="select">
                                     <select class="select__item" name="" id="">
-                                        <option value="">jeanclaude@gmail.com</option>
-                                        <option value="">him@gmail.com</option>
+                                        <option value="">{{email}}</option>
+                                        <option value="">admin@t07.com</option>
                                     </select>
                                     <i class="select__arrow fas fa-sort-down"></i>
                                 </div>
@@ -169,16 +170,15 @@
                         <div class="new-mail-exp">
                             <div class="new-mail-exp__item">
                                 <div class="new-mail-exp__label">To</div>
-                                <input placeholder="Enter email" type="text" class="new-mail-exp__input">
+                                <input placeholder="Enter email" type="text" class="new-mail-exp__input" id="emailInput">
                             </div>
                             <div class="new-mail-exp__item">
                                 <div class="new-mail-exp__label">Object</div>
-                                <input placeholder="Enter mail object" type="text" class="new-mail-exp__input">
+                                <input placeholder="Enter mail object" type="text" class="new-mail-exp__input" id="objectInput">
                             </div>
                         </div>
                         <div class="new-mail__content">
-                            <textarea
-                                class="new-mail__message">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur eveniet corrupti deserunt ad cum inventore error architecto voluptatum temporibus eligendi asperiores placeat explicabo, consequatur molestias. Corrupti voluptatem commodi dicta dolorum.</textarea>
+                            <textarea class="new-mail__message" id="messageTextarea"></textarea>
                         </div>
                         <div class="new-mail-foot">
                             <div class="new-mail-foot__insert">
@@ -187,8 +187,8 @@
                                 <i class="new-mail-foot__icon fas fa-paperclip"></i>
                             </div>
                             <div class="new-mail-foot__actions">
-                                <button class="button button new-mail__toggle">Cancel</button>
-                                <button class="button button--primary">
+                                <button class="button button new-mail__toggle" onclick="cleanInput()">Cancel</button>
+                                <button class="button button--primary new-mail__toggle" onclick="Mailing()">
                                     <i class="fas fa-paper-plane"></i></button>
                             </div>
                         </div>
