@@ -133,10 +133,10 @@ def send_mail():
     
     
 
-@app.route('/get-secret-key')
-def secret_key():
-    secret_key = app.secret_key
-    return jsonify({"secret_key": secret_key})
+# @app.route('/get-secret-key')
+# def secret_key():
+#     secret_key = app.secret_key
+#     return jsonify({"secret_key": secret_key})
 
 
 if __name__ == '__main__':
